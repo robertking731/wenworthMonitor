@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { AgChartsReact } from 'ag-charts-react';
+import { AgChartInstance, AgChartOptions } from 'ag-charts-community';
 import 'ag-charts-enterprise';
 import Container from '@mui/material/Container';
 import {alpha } from '@mui/material/styles';
