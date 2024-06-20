@@ -11,13 +11,7 @@
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "rm:all": "rm -rf node_modules .next out dist build",
-    "re:start": "yarn rm:all && yarn install && yarn dev",
-    "re:build": "yarn rm:all && yarn install && yarn build",
-    "re:build-npm": "npm run rm:all && npm install && npm run build",
-    "dev:ts": "yarn dev & yarn ts:watch",
-    "ts": "tsc --noEmit --incremental",
-    "ts:watch": "yarn ts --watch"
+    "rm:all": "rm -rf node_modules .next out dist build"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
