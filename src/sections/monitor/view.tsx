@@ -1,30 +1,30 @@
 'use client';
+
 import React from 'react';
 import { AgChartsReact } from 'ag-charts-react';
-import { AgChartInstance, AgChartOptions } from 'ag-charts-community';
 import 'ag-charts-enterprise';
 import Container from '@mui/material/Container';
-import {alpha } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { options,chartLists } from './chartCofig';
+import { option, chartLists } from './chartCofig';
 
-export default function BasicGrid() {
+export default () => {
   const settings = useSettingsContext();
-  
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> Monitor</Typography>
       <TextField
-          id="outlined-query-input"
-          label="Enter a query or ticker"
-          type="text"
-          className='mt-8'
-          fullWidth
-        />
+        id="outlined-query-input"
+        label="Enter a query or ticker"
+        type="text"
+        className="mt-8"
+        fullWidth
+      />
       <Box
         sx={{
           mt: 1,
@@ -36,54 +36,41 @@ export default function BasicGrid() {
         }}
       >
         <Grid container>
-          <div className='flex flex-wrap justify-between'>
+          <div className="flex flex-wrap justify-between">
             {chartLists.map((item) => {
-              var mainColor = "";
-              console.log(item.percentage<0)
-              if(Number(item.percentage) < 0) {
-                options.series = [
-                  {
-                    type: 'area',
-                    xKey: 'date',
-                    yKey: 'detachedHouses',
-                    fill: 'red',
-                  },
-                ],
-                mainColor = "red";
-              }else {
-                options.series = [
-                  {
-                    type: 'area',
-                    xKey: 'date',
-                    yKey: 'detachedHouses',
-                    fill: 'green',
-                  },
-                ],
-                mainColor = "green";
-              }
-              const newOption = Object.assign({},options)
-              return(
-              <div className="w-[200px] mr-3">
-                <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
-                  {item.title}
-                </Typography>
-                <div className="text-center">
-                  <Typography variant="body1" gutterBottom>
-                    price: {item.price} 
+              const newOption:any = { ...option };
+              newOption.series = [
+                {
+                  type: 'area',
+                  xKey: 'date',
+                  yKey: 'detachedHouses',
+                  fill: item.percentage < 0 ? 'red' : 'green'
+                }
+              ];
+              const mainColor = item.percentage < 0 ? 'red' : 'green';
+              return (
+                <div className="w-[200px] mr-3">
+                  <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center'>
+                    {item.title}
                   </Typography>
-                  <div className="w-full h-[150px]">
-                    <AgChartsReact options={newOption} />
+                  <div className="text-center">
+                    <Typography variant="body1" gutterBottom>
+                      price: {item.price}
+                    </Typography>
+                    <div className="w-full h-[150px]">
+                      <AgChartsReact options={newOption} />
+                    </div>
+                    <Typography variant="body1" gutterBottom color={mainColor}>
+                      {item.percentage}% change
+                    </Typography>
                   </div>
-                  <Typography variant="body1" gutterBottom color={mainColor}>
-                    {item.percentage}% change
-                  </Typography>
                 </div>
-              </div>
-            )})}
+              );
+            })}
           </div>
           <Grid item container marginTop={3} justifyContent="space-between" wrap="nowrap">
-            <Grid item xs={12} sm={6} border={'1px solid black'} margin={'0 5px'}>
-              <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
+            <Grid item xs={12} sm={6} border='1px solid black' margin='0 5px'>
+              <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center'>
                 SUMMARY
               </Typography>
               <div>
@@ -102,8 +89,8 @@ export default function BasicGrid() {
                 </Typography>
               </div>
             </Grid>
-            <Grid item xs={12} sm={6} border={'1px solid black'} margin={'0 5px'}>
-              <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
+            <Grid item xs={12} sm={6} border='1px solid black' margin='0 5px'>
+              <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center'>
                 PORTFOLIO
               </Typography>
               <Grid container justifyContent="space-between">
@@ -112,16 +99,16 @@ export default function BasicGrid() {
                     <Typography variant="body1" gutterBottom>
                       &nbsp;
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       Wartime: 0.43%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       Decarb: -0.63%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       Ageing: -0.14%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       AI: -0.04%
                     </Typography>
                   </div>
@@ -131,16 +118,16 @@ export default function BasicGrid() {
                     <Typography variant="h6" gutterBottom>
                       % 1D
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       0.43%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       -0.63%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       -0.14%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'red'}>
+                    <Typography variant="body1" gutterBottom color='red'>
                       -0.04%
                     </Typography>
                   </div>
@@ -150,16 +137,16 @@ export default function BasicGrid() {
                     <Typography variant="h6" gutterBottom>
                       % YTD
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       17.6%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       12.7%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       8.2%
                     </Typography>
-                    <Typography variant="body1" gutterBottom color={'green'}>
+                    <Typography variant="body1" gutterBottom color='green'>
                       26.0%
                     </Typography>
                   </div>
@@ -168,98 +155,98 @@ export default function BasicGrid() {
             </Grid>
           </Grid>
           <Grid item container marginTop={3} justifyContent="space-between" wrap="nowrap">
-            <Grid item xs={12} sm={6} md={4} border={'1px solid black'} margin={'0 5px'}>
-              <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
+            <Grid item xs={12} sm={6} md={4} border='1px solid black' margin='0 5px'>
+              <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center'>
                 NEWS
               </Typography>
               <div className="pl-2">
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   Why the RBA wont raise rates
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   The RBA raised its dot-plot so it will not raise rates until the 2nd half of this
                   year
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   Why the RBA wont raise rates
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   The RBA raised its dot-plot so it will not raise rates until the 2nd half of this
                   year
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   Why the RBA wont raise rates
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   The RBA raised its dot-plot so it will not raise rates until the 2nd half of this
                   year
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   Why the RBA wont raise rates
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   The RBA raised its dot-plot so it will not raise rates until the 2nd half of this
                   year
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
               </div>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} border={'1px solid black'} margin={'0 5px'}>
-              <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
+            <Grid item xs={12} sm={6} md={4} border='1px solid black' margin='0 5px'>
+              <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center' >
                 RESEARCH
               </Typography>
               <div className="pl-2">
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   BOFA: Latest equity research trends
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   BOFA believes gold prices will rise
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   BOFA: Latest equity research trends
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   BOFA believes gold prices will rise
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   BOFA: Latest equity research trends
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   BOFA believes gold prices will rise
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
-                <Typography variant="body1" gutterBottom color={'green'}>
+                <Typography variant="body1" gutterBottom color='green'>
                   BOFA: Latest equity research trends
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   BOFA believes gold prices will rise
                 </Typography>
-                <Typography variant="body2" gutterBottom color={'grey'}>
+                <Typography variant="body2" gutterBottom color='grey'>
                   20th June
                 </Typography>
               </div>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} border={'1px solid black'} margin={'0 5px'}>
-              <Typography variant="h6" gutterBottom bgcolor={'#104b57'} textAlign={'center'}>
+            <Grid item xs={12} sm={6} md={4} border='1px solid black' margin='0 5px'>
+              <Typography variant="h6" gutterBottom bgcolor='#104b57' textAlign='center'>
                 PORTFOLIO UPDATES
               </Typography>
               <div className="pl-2">

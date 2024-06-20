@@ -51,7 +51,7 @@ export const chartLists = [
     },
   ];
 
-  export var options = {
+  export const option = {
     data: getData(),
     width: 250,
     series: [
@@ -59,7 +59,7 @@ export const chartLists = [
         type: 'area',
         xKey: 'date',
         yKey: 'detachedHouses',
-        fill: 'green',
+        fill: 'green'
       },
     ],
     background: {
