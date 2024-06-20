@@ -1,0 +1,14 @@
+/* scrollbar */
+@import 'simplebar-react/dist/simplebar.min.css';
+
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    scrollbar-track-color: transparent !important;
+}
+
+*:hover {
+    scrollbar-color: #919EAB22 transparent;
+    scrollbar-track-color: #919EAB22;
+}
